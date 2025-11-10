@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 from utils.db import workouts_collection
 from utils.analysis import generate_summary_and_chart
-
+import os
 app = Flask(__name__)
 
 # Home Page — Show All Workouts
@@ -35,4 +35,5 @@ def dashboard():
     return render_template('dashboard.html', summary=summary, chart_path=chart_path)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
+
