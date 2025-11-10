@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - FitTrack</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-4 text-center">
+    <h2 class="mb-4">📊 Fitness Dashboard</h2>
+
+    {% if summary %}
+        <div class="row mb-4">
+            <div class="col-md-3"><div class="card p-3"><h5>Total Calories</h5><p>{{ summary.total_calories }}</p></div></div>
+            <div class="col-md-3"><div class="card p-3"><h5>Avg Calories</h5><p>{{ summary.avg_calories }}</p></div></div>
+            <div class="col-md-3"><div class="card p-3"><h5>Total Duration</h5><p>{{ summary.total_duration }} min</p></div></div>
+            <div class="col-md-3"><div class="card p-3"><h5>Avg Duration</h5><p>{{ summary.avg_duration }} min</p></div></div>
+        </div>
+
+        {% if chart_path %}
+        <h4>Calories Burned Over Time</h4>
+        <img src="{{ url_for('static', filename='charts/progress.png') }}" alt="Progress Chart" class="img-fluid rounded shadow">
+        {% endif %}
+    {% else %}
+        <p class="text-muted">No workout data available yet. Add a few workouts to see your progress!</p>
+    {% endif %}
+
+    <div class="mt-4">
+        <a href="/" class="btn btn-secondary">⬅ Back to Home</a>
+    </div>
+</div>
+</body>
+</html>
